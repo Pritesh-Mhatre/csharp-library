@@ -172,11 +172,5 @@ namespace com.dakshata.autotrader.api
         /// </summary>
         void shutdown();
 
-        /// <summary>
-        /// Allows the library user to change API key using code. This is rarely needed.
-        /// </summary>
-        /// <param name="apiKey"> api key </param>
-        string ApiKey { set; }
-
     }
 }
