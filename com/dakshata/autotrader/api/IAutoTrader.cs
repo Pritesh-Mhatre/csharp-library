@@ -36,8 +36,6 @@ namespace com.dakshata.autotrader.api
         /// <param name="price">         price </param>
         /// <param name="triggerPrice">  trigger price </param>
         /// <returns> the order id given by your stock broker </returns>
-        //JAVA TO C# CONVERTER WARNING: 'final' parameters are ignored unless the option to convert to C# 7.2 'in' parameters is selected:
-        //ORIGINAL LINE: com.dakshata.data.model.common.IOperationResponse<String> placeRegularOrder(final String pseudoAccount, String exchange, String symbol, com.dakshata.constants.trading.TradeType tradeType, com.dakshata.constants.trading.OrderType orderType, com.dakshata.constants.trading.ProductType productType, int quantity, float price, float triggerPrice);
         IOperationResponse<string> PlaceRegularOrder(string pseudoAccount, string exchange, string symbol, TradeType tradeType, OrderType orderType, ProductType productType, int quantity, float price, float triggerPrice);
 
         /// <summary>
@@ -88,8 +86,6 @@ namespace com.dakshata.autotrader.api
         /// <param name="triggerPrice">  trigger price (pass zero if you do not want to modify
         ///                      trigger price) </param>
         /// <returns> <code>true</code> on success, <code>false</code> otherwise </returns>
-        //JAVA TO C# CONVERTER WARNING: 'final' parameters are ignored unless the option to convert to C# 7.2 'in' parameters is selected:
-        //ORIGINAL LINE: com.dakshata.data.model.common.IOperationResponse<bool> modifyOrderByPlatformId(final String pseudoAccount, final String platformId, final com.dakshata.constants.trading.OrderType orderType, final System.Nullable<int> quantity, final System.Nullable<float> price, final System.Nullable<float> triggerPrice);
         IOperationResponse<bool> ModifyOrderByPlatformId(string pseudoAccount, string platformId, OrderType orderType, int? quantity, float? price, float? triggerPrice);
 
         /// <summary>
@@ -123,8 +119,6 @@ namespace com.dakshata.autotrader.api
         /// <param name="exchange">      position exchange (broker independent exchange) </param>
         /// <param name="symbol">        position symbol (broker independent symbol) </param>
         /// <returns> true on successful acceptance of square-off request, false otherwise </returns>
-        //JAVA TO C# CONVERTER WARNING: 'final' parameters are ignored unless the option to convert to C# 7.2 'in' parameters is selected:
-        //ORIGINAL LINE: com.dakshata.data.model.common.IOperationResponse<bool> squareOffPosition(final String pseudoAccount, final com.dakshata.constants.trading.PositionCategory category, final com.dakshata.constants.trading.PositionType type, final String exchange, final String symbol);
         IOperationResponse<bool> SquareOffPosition(string pseudoAccount, PositionCategory category, PositionType type, string exchange, string symbol);
 
         /// <summary>
@@ -133,8 +127,6 @@ namespace com.dakshata.autotrader.api
         /// <param name="pseudoAccount"> pseudo account </param>
         /// <param name="category">      position category (DAY or NET portfolio to consider) </param>
         /// <returns> true on successful acceptance of square-off request, false otherwise </returns>
-        //JAVA TO C# CONVERTER WARNING: 'final' parameters are ignored unless the option to convert to C# 7.2 'in' parameters is selected:
-        //ORIGINAL LINE: com.dakshata.data.model.common.IOperationResponse<bool> squareOffPortfolio(final String pseudoAccount, final com.dakshata.constants.trading.PositionCategory category);
         IOperationResponse<bool> SquareOffPortfolio(string pseudoAccount, PositionCategory category);
 
         /// <summary>
@@ -143,8 +135,6 @@ namespace com.dakshata.autotrader.api
         /// </summary>
         /// <param name="pseudoAccount"> pseudo account id </param>
         /// <returns> orders trading platform orders </returns>
-        //JAVA TO C# CONVERTER WARNING: 'final' parameters are ignored unless the option to convert to C# 7.2 'in' parameters is selected:
-        //ORIGINAL LINE: com.dakshata.data.model.common.IOperationResponse<java.util.Set<com.dakshata.trading.model.platform.PlatformOrder>> readPlatformOrders(final String pseudoAccount);
         IOperationResponse<ISet<PlatformOrder>> ReadPlatformOrders(string pseudoAccount);
 
         /// <summary>
@@ -153,8 +143,6 @@ namespace com.dakshata.autotrader.api
         /// </summary>
         /// <param name="pseudoAccount"> pseudo account id </param>
         /// <returns> positions trading platform positions </returns>
-        //JAVA TO C# CONVERTER WARNING: 'final' parameters are ignored unless the option to convert to C# 7.2 'in' parameters is selected:
-        //ORIGINAL LINE: com.dakshata.data.model.common.IOperationResponse<java.util.Set<com.dakshata.trading.model.platform.PlatformPosition>> readPlatformPositions(final String pseudoAccount);
         IOperationResponse<ISet<PlatformPosition>> ReadPlatformPositions(string pseudoAccount);
 
         /// <summary>
@@ -163,8 +151,6 @@ namespace com.dakshata.autotrader.api
         /// </summary>
         /// <param name="pseudoAccount"> pseudo account id </param>
         /// <returns> margins trading platform margins </returns>
-        //JAVA TO C# CONVERTER WARNING: 'final' parameters are ignored unless the option to convert to C# 7.2 'in' parameters is selected:
-        //ORIGINAL LINE: com.dakshata.data.model.common.IOperationResponse<java.util.Set<com.dakshata.trading.model.platform.PlatformMargin>> readPlatformMargins(final String pseudoAccount);
         IOperationResponse<ISet<PlatformMargin>> ReadPlatformMargins(string pseudoAccount);
 
         /// <summary>
