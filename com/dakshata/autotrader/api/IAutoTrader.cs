@@ -156,7 +156,7 @@ namespace com.dakshata.autotrader.api
         /// <summary>
         /// Graceful shutdown. Call when your application is about to exit.
         /// </summary>
-        void shutdown();
+        void Shutdown();
 
     }
 }
