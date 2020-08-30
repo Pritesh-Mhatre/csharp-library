@@ -2,6 +2,7 @@ using com.dakshata.constants.trading;
 using com.dakshata.data.model.common;
 using com.dakshata.trading.model.platform;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace com.dakshata.autotrader.api
 {
@@ -19,7 +20,7 @@ namespace com.dakshata.autotrader.api
         /// Provides live pseudo accounts available under your user.
         /// </summary>
         /// <returns> live pseudo accounts </returns>
-        IOperationResponse<ISet<string>> FetchLivePseudoAccounts();
+        IOperationResponse<HashSet<string>> FetchLivePseudoAccounts();
 
         /// <summary>
         /// Places a regular order. For more information, please see <a href=
