@@ -1,6 +1,7 @@
 using com.dakshata.constants.trading;
 using com.dakshata.data.model.common;
 using com.dakshata.trading.model.platform;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@ namespace com.dakshata.autotrader.api
         /// Provides live pseudo accounts available under your user.
         /// </summary>
         /// <returns> live pseudo accounts </returns>
-        IOperationResponse<HashSet<string>> FetchLivePseudoAccounts();
+        IOperationResponse<HashSet<String>> FetchLivePseudoAccounts();
 
         /// <summary>
         /// Places a regular order. For more information, please see <a href=
@@ -37,7 +38,7 @@ namespace com.dakshata.autotrader.api
         /// <param name="price">         price </param>
         /// <param name="triggerPrice">  trigger price </param>
         /// <returns> the order id given by your stock broker </returns>
-        IOperationResponse<string> PlaceRegularOrder(string pseudoAccount, string exchange, string symbol, TradeType tradeType, OrderType orderType, ProductType productType, int quantity, float price, float triggerPrice);
+        IOperationResponse<String> PlaceRegularOrder(string pseudoAccount, string exchange, string symbol, TradeType tradeType, OrderType orderType, ProductType productType, int quantity, float price, float triggerPrice);
 
         /// <summary>
         /// Places a bracket order. For more information, please see <a href=
@@ -56,7 +57,7 @@ namespace com.dakshata.autotrader.api
         /// <param name="stoploss">         stoploss </param>
         /// <param name="trailingStoploss"> trailing stoploss </param>
         /// <returns> the order id given by your stock broker </returns>
-        IOperationResponse<string> PlaceBracketOrder(string pseudoAccount, string exchange, string symbol, TradeType tradeType, OrderType orderType, int quantity, float price, float triggerPrice, float target, float stoploss, float trailingStoploss);
+        IOperationResponse<String> PlaceBracketOrder(string pseudoAccount, string exchange, string symbol, TradeType tradeType, OrderType orderType, int quantity, float price, float triggerPrice, float target, float stoploss, float trailingStoploss);
 
         /// <summary>
         /// Places a cover order. For more information, please see <a href=
@@ -72,7 +73,7 @@ namespace com.dakshata.autotrader.api
         /// <param name="price">         price </param>
         /// <param name="triggerPrice">  trigger price </param>
         /// <returns> the order id given by your stock broker </returns>
-        IOperationResponse<string> PlaceCoverOrder(string pseudoAccount, string exchange, string symbol, TradeType tradeType, OrderType orderType, int quantity, float price, float triggerPrice);
+        IOperationResponse<String> PlaceCoverOrder(string pseudoAccount, string exchange, string symbol, TradeType tradeType, OrderType orderType, int quantity, float price, float triggerPrice);
 
         /// <summary>
         /// Modifies the order as per the parameters passed.
@@ -87,7 +88,7 @@ namespace com.dakshata.autotrader.api
         /// <param name="triggerPrice">  trigger price (pass zero if you do not want to modify
         ///                      trigger price) </param>
         /// <returns> <code>true</code> on success, <code>false</code> otherwise </returns>
-        IOperationResponse<bool> ModifyOrderByPlatformId(string pseudoAccount, string platformId, OrderType orderType, int? quantity, float? price, float? triggerPrice);
+        IOperationResponse<bool?> ModifyOrderByPlatformId(string pseudoAccount, string platformId, OrderType orderType, int? quantity, float? price, float? triggerPrice);
 
         /// <summary>
         /// Cancels an order. For more information, please see
@@ -97,7 +98,7 @@ namespace com.dakshata.autotrader.api
         /// <param name="pseudoAccount"> pseudo account </param>
         /// <param name="platformId">    platform id (id given to order by trading platform) </param>
         /// <returns> <code>true</code> on success, <code>false</code> otherwise </returns>
-        IOperationResponse<bool> CancelOrderByPlatformId(string pseudoAccount, string platformId);
+        IOperationResponse<bool?> CancelOrderByPlatformId(string pseudoAccount, string platformId);
 
         /// <summary>
         /// Used for exiting an open Bracket order or Cover order position. Cancels the
@@ -109,7 +110,7 @@ namespace com.dakshata.autotrader.api
         /// <param name="pseudoAccount"> pseudo account </param>
         /// <param name="platformId">    platform id (id given to order by trading platform) </param>
         /// <returns> <code>true</code> on success, <code>false</code> otherwise </returns>
-        IOperationResponse<bool> CancelChildOrdersByPlatformId(string pseudoAccount, string platformId);
+        IOperationResponse<bool?> CancelChildOrdersByPlatformId(string pseudoAccount, string platformId);
 
         /// <summary>
         /// Submits a square-off position request.
@@ -120,7 +121,7 @@ namespace com.dakshata.autotrader.api
         /// <param name="exchange">      position exchange (broker independent exchange) </param>
         /// <param name="symbol">        position symbol (broker independent symbol) </param>
         /// <returns> true on successful acceptance of square-off request, false otherwise </returns>
-        IOperationResponse<bool> SquareOffPosition(string pseudoAccount, PositionCategory category, PositionType type, string exchange, string symbol);
+        IOperationResponse<bool?> SquareOffPosition(string pseudoAccount, PositionCategory category, PositionType type, string exchange, string symbol);
 
         /// <summary>
         /// Submits a square-off portfolio request.
@@ -128,7 +129,7 @@ namespace com.dakshata.autotrader.api
         /// <param name="pseudoAccount"> pseudo account </param>
         /// <param name="category">      position category (DAY or NET portfolio to consider) </param>
         /// <returns> true on successful acceptance of square-off request, false otherwise </returns>
-        IOperationResponse<bool> SquareOffPortfolio(string pseudoAccount, PositionCategory category);
+        IOperationResponse<bool?> SquareOffPortfolio(string pseudoAccount, PositionCategory category);
 
         /// <summary>
         /// Read trading platform orders from the trading account mapped to the given

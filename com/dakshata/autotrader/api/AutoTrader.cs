@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Net;
 using System.IO;
+using System.Web;
+using System.Text;
 
 namespace com.dakshata.autotrader.api
 {
@@ -23,6 +25,7 @@ namespace com.dakshata.autotrader.api
         private static readonly JsonSerializerOptions JSON_OPTIONS = new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true,
+            IgnoreNullValues = true
         };
 
         /// <summary>
@@ -68,7 +71,7 @@ namespace com.dakshata.autotrader.api
             }
         }
 
-        private IOperationResponse<T> Execute<T>(string method, string uri)
+        private IOperationResponse<T> Execute<T>(string method, string uri, IDictionary<string, object> data = null)
         {
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(this.serviceUrl + uri);
@@ -76,8 +79,26 @@ namespace com.dakshata.autotrader.api
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             request.Headers["api-key"] = this.apiKey;
 
-            var content = string.Empty;
+            if(data != null && data.Count > 0)
+            {
+                string postData = "";
+                foreach (string key in data.Keys)
+                {
+                    postData += HttpUtility.UrlEncode(key) + "="
+                          + HttpUtility.UrlEncode(data[key].ToString()) + "&";
+                }
 
+                byte[] bytes = Encoding.ASCII.GetBytes(postData);
+                request.ContentLength = bytes.Length;
+                request.ContentType = "application/x-www-form-urlencoded";
+
+                Stream dataStream = request.GetRequestStream();
+                dataStream.Write(bytes, 0, bytes.Length);
+                dataStream.Close();
+            }
+
+
+            var content = string.Empty;
             try
             {
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
@@ -104,17 +125,28 @@ namespace com.dakshata.autotrader.api
             return Execute<HashSet<string>>("GET", ACCOUNT_URI + "/fetchLivePseudoAccounts");
         }
 
-        public IOperationResponse<bool> CancelChildOrdersByPlatformId(string pseudoAccount, string platformId)
+        private IOperationResponse<bool?> CancelGeneric(string uri, string pseudoAccount, string platformId)
         {
-            throw new NotImplementedException();
+            Dictionary<string, object> data = new Dictionary<string, object>
+            {
+                { "pseudoAccount", pseudoAccount },
+                { "platformId", platformId }
+            };
+
+            return Execute<bool?>("POST", TRADING_URI + uri, data);
         }
 
-        public IOperationResponse<bool> CancelOrderByPlatformId(string pseudoAccount, string platformId)
+        public IOperationResponse<bool?> CancelOrderByPlatformId(string pseudoAccount, string platformId)
         {
-            throw new NotImplementedException();
+            return CancelGeneric("/cancelOrderByPlatformId", pseudoAccount, platformId);
         }
 
-        public IOperationResponse<bool> ModifyOrderByPlatformId(string pseudoAccount, string platformId, OrderType orderType, int? quantity, float? price, float? triggerPrice)
+        public IOperationResponse<bool?> CancelChildOrdersByPlatformId(string pseudoAccount, string platformId)
+        {
+            return CancelGeneric("/cancelChildOrdersByPlatformId", pseudoAccount, platformId);
+        }
+
+        public IOperationResponse<bool?> ModifyOrderByPlatformId(string pseudoAccount, string platformId, OrderType orderType, int? quantity, float? price, float? triggerPrice)
         {
             throw new NotImplementedException();
         }
@@ -154,12 +186,12 @@ namespace com.dakshata.autotrader.api
             throw new NotImplementedException();
         }
 
-        public IOperationResponse<bool> SquareOffPortfolio(string pseudoAccount, PositionCategory category)
+        public IOperationResponse<bool?> SquareOffPortfolio(string pseudoAccount, PositionCategory category)
         {
             throw new NotImplementedException();
         }
 
-        public IOperationResponse<bool> SquareOffPosition(string pseudoAccount, PositionCategory category, PositionType type, string exchange, string symbol)
+        public IOperationResponse<bool?> SquareOffPosition(string pseudoAccount, PositionCategory category, PositionType type, string exchange, string symbol)
         {
             throw new NotImplementedException();
         }
