@@ -4,9 +4,9 @@ using com.dakshata.trading.model.platform;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using unirest_net.http;
 using System.Text.Json;
-using System.Text.Json.Serialization;
+using System.Net;
+using System.IO;
 
 namespace com.dakshata.autotrader.api
 {
@@ -68,25 +68,40 @@ namespace com.dakshata.autotrader.api
             }
         }
 
-        private IOperationResponse<T> Execute<T>(string uri)
+        private IOperationResponse<T> Execute<T>(string method, string uri)
         {
-            HttpResponse<string> response =
-                Unirest.get(this.serviceUrl + uri)
-                .header("api-key", apiKey)
-                .asString();
 
-            if(response.Code != 200)
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(this.serviceUrl + uri);
+            request.Method = method;
+            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
+            request.Headers["api-key"] = this.apiKey;
+
+            var content = string.Empty;
+
+            try
             {
-                string message = "HTTP Error: " + response.Code;
-                return new OperationResponse<T>(default(T), new ApplicationException(message), message, null);
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    using (var stream = response.GetResponseStream())
+                    {
+                        using (var sr = new StreamReader(stream))
+                        {
+                            content = sr.ReadToEnd();
+                        }
+                    }
+                }
+            }
+            catch (WebException ex)
+            {
+                return new OperationResponse<T>(default, ex, null, null);
             }
 
-            return JsonSerializer.Deserialize<OperationResponse<T>>(response.Body, JSON_OPTIONS);
+            return JsonSerializer.Deserialize<OperationResponse<T>>(content, JSON_OPTIONS);
         }
 
         public IOperationResponse<HashSet<string>> FetchLivePseudoAccounts()
         {
-            return Execute<HashSet<string>>(ACCOUNT_URI + "/fetchLivePseudoAccounts");
+            return Execute<HashSet<string>>("GET", ACCOUNT_URI + "/fetchLivePseudoAccounts");
         }
 
         public IOperationResponse<bool> CancelChildOrdersByPlatformId(string pseudoAccount, string platformId)
