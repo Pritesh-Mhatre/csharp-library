@@ -82,13 +82,13 @@ namespace com.dakshata.autotrader.api
         /// <param name="platformId">    platform id (id given to order by trading platform) </param>
         /// <param name="orderType">     order type (pass null if you do not want to modify order
         ///                      type) </param>
-        /// <param name="quantity">      quantity (pass zero if you do not want to modify
+        /// <param name="quantity">      quantity (pass null or zero if you do not want to modify
         ///                      quantity) </param>
-        /// <param name="price">         price (pass zero if you do not want to modify price) </param>
-        /// <param name="triggerPrice">  trigger price (pass zero if you do not want to modify
+        /// <param name="price">         price (pass null or zero if you do not want to modify price) </param>
+        /// <param name="triggerPrice">  trigger price (pass null or zero if you do not want to modify
         ///                      trigger price) </param>
         /// <returns> <code>true</code> on success, <code>false</code> otherwise </returns>
-        IOperationResponse<bool?> ModifyOrderByPlatformId(string pseudoAccount, string platformId, OrderType orderType, int? quantity, float? price, float? triggerPrice);
+        IOperationResponse<bool?> ModifyOrderByPlatformId(string pseudoAccount, string platformId, OrderType? orderType, int? quantity, float? price, float? triggerPrice);
 
         /// <summary>
         /// Cancels an order. For more information, please see

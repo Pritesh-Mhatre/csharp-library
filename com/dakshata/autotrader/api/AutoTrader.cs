@@ -14,19 +14,24 @@ namespace com.dakshata.autotrader.api
 {
     public class AutoTrader : IAutoTrader
     {
+
+        private const string GET = "GET", POST = "POST";
+
         private const string TRADING_URI = "/trading";
 
         private const string ACCOUNT_URI = "/account";
 
-        private static readonly IDictionary<string, AutoTrader> INSTANCES = new ConcurrentDictionary<string, AutoTrader>();
+        private static readonly IDictionary<string, AutoTrader> INSTANCES =
+            new ConcurrentDictionary<string, AutoTrader>();
 
         private readonly string apiKey, serviceUrl;
 
-        private static readonly JsonSerializerOptions JSON_OPTIONS = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true,
-            IgnoreNullValues = true
-        };
+        private static readonly JsonSerializerOptions JSON_OPTIONS =
+            new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+                IgnoreNullValues = true
+            };
 
         /// <summary>
         /// Initialize the AutoTrader API with your private API key.
@@ -71,7 +76,138 @@ namespace com.dakshata.autotrader.api
             }
         }
 
-        private IOperationResponse<T> Execute<T>(string method, string uri, IDictionary<string, object> data = null)
+        public IOperationResponse<HashSet<string>> FetchLivePseudoAccounts()
+        {
+            return Execute<HashSet<string>>(GET, ACCOUNT_URI + "/fetchLivePseudoAccounts");
+        }
+
+        public IOperationResponse<bool?> CancelOrderByPlatformId(string pseudoAccount,
+            string platformId)
+        {
+            return CancelGeneric("/cancelOrderByPlatformId", pseudoAccount, platformId);
+        }
+
+        public IOperationResponse<bool?> CancelChildOrdersByPlatformId(string pseudoAccount, 
+            string platformId)
+        {
+            return CancelGeneric("/cancelChildOrdersByPlatformId", pseudoAccount, platformId);
+        }
+
+        public IOperationResponse<bool?> ModifyOrderByPlatformId(string pseudoAccount, 
+            string platformId, OrderType? orderType, int? quantity, float? price, 
+            float? triggerPrice)
+        {
+            IDictionary<string, object> data = new Dictionary<string, object>();
+            data["pseudoAccount"] = pseudoAccount;
+            data["platformId"] = platformId;
+            if (orderType != null)
+                data["orderType"] = Enum.GetName(typeof(OrderType), orderType);
+            if (quantity != null)
+                data["quantity"] = quantity;
+            if (price != null)
+                data["price"] = price;
+            if (triggerPrice != null)
+                data["triggerPrice"] = triggerPrice;
+
+            return Execute<bool?>(POST, TRADING_URI + "/modifyOrderByPlatformId", data);
+        }
+
+        public IOperationResponse<string> PlaceBracketOrder(string pseudoAccount, 
+            string exchange, string symbol, TradeType tradeType, OrderType orderType, 
+            int quantity, float price, float triggerPrice, 
+            float target, float stoploss, float trailingStoploss)
+        {
+            IDictionary<string, object> data = new Dictionary<string, object>
+            {
+                ["pseudoAccount"] = pseudoAccount,
+                ["exchange"] = exchange,
+                ["symbol"] = symbol,
+                ["tradeType"] = tradeType,
+                ["orderType"] = orderType,
+                ["quantity"] = quantity,
+                ["price"] = price,
+                ["triggerPrice"] = triggerPrice,
+                ["target"] = target,
+                ["stoploss"] = stoploss,
+                ["trailingStoploss"] = trailingStoploss
+            };
+
+            return Execute<string>(POST, TRADING_URI + "/placeBracketOrder", data);
+        }
+
+        public IOperationResponse<string> PlaceCoverOrder(string pseudoAccount, 
+            string exchange, string symbol, TradeType tradeType, OrderType orderType, 
+            int quantity, float price, float triggerPrice)
+        {
+            IDictionary<string, object> data = new Dictionary<string, object>
+            {
+                ["pseudoAccount"] = pseudoAccount,
+                ["exchange"] = exchange,
+                ["symbol"] = symbol,
+                ["tradeType"] = tradeType,
+                ["orderType"] = orderType,
+                ["quantity"] = quantity,
+                ["price"] = price,
+                ["triggerPrice"] = triggerPrice
+            };
+
+            return Execute<string>(POST, TRADING_URI + "/placeCoverOrder", data);
+        }
+
+        public IOperationResponse<string> PlaceRegularOrder(string pseudoAccount, 
+            string exchange, string symbol, TradeType tradeType, OrderType orderType, 
+            ProductType productType, int quantity, float price, float triggerPrice)
+        {
+            IDictionary<string, object> data = new Dictionary<string, object>
+            {
+                ["pseudoAccount"] = pseudoAccount,
+                ["exchange"] = exchange,
+                ["symbol"] = symbol,
+                ["tradeType"] = tradeType,
+                ["orderType"] = orderType,
+                ["productType"] = productType,
+                ["quantity"] = quantity,
+                ["price"] = price,
+                ["triggerPrice"] = triggerPrice
+            };
+
+            return Execute<string>(POST, TRADING_URI + "/placeRegularOrder", data);
+        }
+
+        public IOperationResponse<ISet<PlatformMargin>> ReadPlatformMargins(string pseudoAccount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IOperationResponse<ISet<PlatformOrder>> ReadPlatformOrders(string pseudoAccount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IOperationResponse<ISet<PlatformPosition>> ReadPlatformPositions(string pseudoAccount)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Shutdown()
+        {
+            // Nothing needed here
+        }
+
+        public IOperationResponse<bool?> SquareOffPortfolio(string pseudoAccount, 
+            PositionCategory category)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IOperationResponse<bool?> SquareOffPosition(string pseudoAccount, 
+            PositionCategory category, PositionType type, string exchange, string symbol)
+        {
+            throw new NotImplementedException();
+        }
+
+        private IOperationResponse<T> Execute<T>(string method, string uri, 
+            IDictionary<string, object> data = null)
         {
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(this.serviceUrl + uri);
@@ -79,7 +215,7 @@ namespace com.dakshata.autotrader.api
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             request.Headers["api-key"] = this.apiKey;
 
-            if(data != null && data.Count > 0)
+            if (data != null && data.Count > 0)
             {
                 string postData = "";
                 foreach (string key in data.Keys)
@@ -119,13 +255,8 @@ namespace com.dakshata.autotrader.api
 
             return JsonSerializer.Deserialize<OperationResponse<T>>(content, JSON_OPTIONS);
         }
-
-        public IOperationResponse<HashSet<string>> FetchLivePseudoAccounts()
-        {
-            return Execute<HashSet<string>>("GET", ACCOUNT_URI + "/fetchLivePseudoAccounts");
-        }
-
-        private IOperationResponse<bool?> CancelGeneric(string uri, string pseudoAccount, string platformId)
+        private IOperationResponse<bool?> CancelGeneric(string uri, string pseudoAccount, 
+            string platformId)
         {
             Dictionary<string, object> data = new Dictionary<string, object>
             {
@@ -133,67 +264,8 @@ namespace com.dakshata.autotrader.api
                 { "platformId", platformId }
             };
 
-            return Execute<bool?>("POST", TRADING_URI + uri, data);
+            return Execute<bool?>(POST, TRADING_URI + uri, data);
         }
 
-        public IOperationResponse<bool?> CancelOrderByPlatformId(string pseudoAccount, string platformId)
-        {
-            return CancelGeneric("/cancelOrderByPlatformId", pseudoAccount, platformId);
-        }
-
-        public IOperationResponse<bool?> CancelChildOrdersByPlatformId(string pseudoAccount, string platformId)
-        {
-            return CancelGeneric("/cancelChildOrdersByPlatformId", pseudoAccount, platformId);
-        }
-
-        public IOperationResponse<bool?> ModifyOrderByPlatformId(string pseudoAccount, string platformId, OrderType orderType, int? quantity, float? price, float? triggerPrice)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IOperationResponse<string> PlaceBracketOrder(string pseudoAccount, string exchange, string symbol, TradeType tradeType, OrderType orderType, int quantity, float price, float triggerPrice, float target, float stoploss, float trailingStoploss)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IOperationResponse<string> PlaceCoverOrder(string pseudoAccount, string exchange, string symbol, TradeType tradeType, OrderType orderType, int quantity, float price, float triggerPrice)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IOperationResponse<string> PlaceRegularOrder(string pseudoAccount, string exchange, string symbol, TradeType tradeType, OrderType orderType, ProductType productType, int quantity, float price, float triggerPrice)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IOperationResponse<ISet<PlatformMargin>> ReadPlatformMargins(string pseudoAccount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IOperationResponse<ISet<PlatformOrder>> ReadPlatformOrders(string pseudoAccount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IOperationResponse<ISet<PlatformPosition>> ReadPlatformPositions(string pseudoAccount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Shutdown()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IOperationResponse<bool?> SquareOffPortfolio(string pseudoAccount, PositionCategory category)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IOperationResponse<bool?> SquareOffPosition(string pseudoAccount, PositionCategory category, PositionType type, string exchange, string symbol)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
