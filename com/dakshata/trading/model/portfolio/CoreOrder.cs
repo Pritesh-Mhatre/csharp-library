@@ -62,10 +62,13 @@ namespace com.dakshata.com.dakshata.trading.model.portfolio
         public string IndependentExchange { get; set; }
 
         public string IndependentSymbol { get; set; }
+
         public override string ToString()
         {
+            string trigPrc = TriggerPrice == null ? "0" : TriggerPrice.ToString();
+
             string csv = string.Join(",", PseudoAccount, Variety, IndependentExchange, IndependentSymbol,
-                ProductType, TradeType, OrderType, Quantity, Price, TriggerPrice, Id);
+                ProductType, TradeType, OrderType, Quantity, Price, trigPrc, Id);
             return "Order [" + csv + "]";
         }
     }

@@ -44,6 +44,18 @@ namespace com.dakshata.com.dakshata.trading.model.portfolio
 
         public string IndependentSymbol { get; set; }
 
+        public override string ToString()
+        {
+            string netQty = (NetQuantity == null) ? "null" : NetQuantity.ToString();
+            string pnl = (this.Pnl == null) ? "null" : this.Pnl.ToString();
+            string mtm = (this.Mtm == null) ? "null" : this.Mtm.ToString();
+
+            string csv = string.Join(",", PseudoAccount, TradingAccount, Type, 
+                IndependentExchange, IndependentSymbol, netQty, pnl, mtm);
+            return "Position [" + csv + "]";
+
+        }
+
     }
 
 }

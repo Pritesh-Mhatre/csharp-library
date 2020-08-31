@@ -1,11 +1,4 @@
-﻿//====================================================================================================
-//The Free Edition of Java to C# Converter limits conversion output to 100 lines per file.
-
-//To purchase the Premium Edition, visit our website:
-//https://www.tangiblesoftwaresolutions.com/order/order-java-to-csharp.html
-//====================================================================================================
-
-using com.dakshata.constants.trading;
+﻿using com.dakshata.constants.trading;
 using com.dakshata.trading.model.portfolio;
 using System;
 using System.Collections.Generic;
@@ -27,5 +20,17 @@ namespace com.dakshata.trading.model.platform
         public string TradingAccount { get; set; }
 
         public string StockBroker { get; set; }
+
+        public override string ToString()
+        {
+            return "PlatformMargin [pseudoAccount=" + PseudoAccount + 
+                ", tradingAccount=" + TradingAccount + 
+                ", stockBroker=" + StockBroker + 
+                ", category=" + Category + 
+                ", funds=" + Funds + 
+                ", utilized=" + Utilized + 
+                ", available=" + Available + "]";
+        }
+
     }
 }
