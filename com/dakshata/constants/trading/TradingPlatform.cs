@@ -1,14 +1,14 @@
 ﻿namespace com.dakshata.constants.trading
 {
-	/// <summary>
-	/// Represents a trading platform.
-	/// </summary>
-	public enum TradingPlatform
-	{
-		KITE,
-		UPSTOX,
-		SCALPERT,
-		ANT
-	}
+    /// <summary>
+    /// Represents a trading platform.
+    /// </summary>
+    public enum TradingPlatform
+    {
+        KITE,
+        UPSTOX,
+        SCALPERT,
+        ANT
+    }
 
 }

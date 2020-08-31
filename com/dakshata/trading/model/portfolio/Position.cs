@@ -50,7 +50,7 @@ namespace com.dakshata.com.dakshata.trading.model.portfolio
             string pnl = (this.Pnl == null) ? "null" : this.Pnl.ToString();
             string mtm = (this.Mtm == null) ? "null" : this.Mtm.ToString();
 
-            string csv = string.Join(",", PseudoAccount, TradingAccount, Type, 
+            string csv = string.Join(",", PseudoAccount, TradingAccount, Type,
                 IndependentExchange, IndependentSymbol, netQty, pnl, mtm);
             return "Position [" + csv + "]";
 

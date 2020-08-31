@@ -1,7 +1,5 @@
 ﻿using com.dakshata.constants.trading;
 using com.dakshata.trading.model.portfolio;
-using System;
-using System.Collections.Generic;
 
 namespace com.dakshata.trading.model.platform
 {
@@ -23,12 +21,12 @@ namespace com.dakshata.trading.model.platform
 
         public override string ToString()
         {
-            return "PlatformMargin [pseudoAccount=" + PseudoAccount + 
-                ", tradingAccount=" + TradingAccount + 
-                ", stockBroker=" + StockBroker + 
-                ", category=" + Category + 
-                ", funds=" + Funds + 
-                ", utilized=" + Utilized + 
+            return "PlatformMargin [pseudoAccount=" + PseudoAccount +
+                ", tradingAccount=" + TradingAccount +
+                ", stockBroker=" + StockBroker +
+                ", category=" + Category +
+                ", funds=" + Funds +
+                ", utilized=" + Utilized +
                 ", available=" + Available + "]";
         }
 

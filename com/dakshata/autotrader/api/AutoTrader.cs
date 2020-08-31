@@ -4,12 +4,12 @@ using com.dakshata.trading.model.platform;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Text.Json;
-using System.Net;
 using System.IO;
-using System.Web;
+using System.Net;
 using System.Text;
+using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Web;
 
 namespace com.dakshata.autotrader.api
 {
@@ -93,14 +93,14 @@ namespace com.dakshata.autotrader.api
             return CancelGeneric("/cancelOrderByPlatformId", pseudoAccount, platformId);
         }
 
-        public IOperationResponse<bool?> CancelChildOrdersByPlatformId(string pseudoAccount, 
+        public IOperationResponse<bool?> CancelChildOrdersByPlatformId(string pseudoAccount,
             string platformId)
         {
             return CancelGeneric("/cancelChildOrdersByPlatformId", pseudoAccount, platformId);
         }
 
-        public IOperationResponse<bool?> ModifyOrderByPlatformId(string pseudoAccount, 
-            string platformId, OrderType? orderType, int? quantity, float? price, 
+        public IOperationResponse<bool?> ModifyOrderByPlatformId(string pseudoAccount,
+            string platformId, OrderType? orderType, int? quantity, float? price,
             float? triggerPrice)
         {
             IDictionary<string, object> data = new Dictionary<string, object>();
@@ -118,9 +118,9 @@ namespace com.dakshata.autotrader.api
             return Execute<bool?>(POST, TRADING_URI + "/modifyOrderByPlatformId", data);
         }
 
-        public IOperationResponse<string> PlaceBracketOrder(string pseudoAccount, 
-            string exchange, string symbol, TradeType tradeType, OrderType orderType, 
-            int quantity, float price, float triggerPrice, 
+        public IOperationResponse<string> PlaceBracketOrder(string pseudoAccount,
+            string exchange, string symbol, TradeType tradeType, OrderType orderType,
+            int quantity, float price, float triggerPrice,
             float target, float stoploss, float trailingStoploss)
         {
             IDictionary<string, object> data = new Dictionary<string, object>
@@ -141,8 +141,8 @@ namespace com.dakshata.autotrader.api
             return Execute<string>(POST, TRADING_URI + "/placeBracketOrder", data);
         }
 
-        public IOperationResponse<string> PlaceCoverOrder(string pseudoAccount, 
-            string exchange, string symbol, TradeType tradeType, OrderType orderType, 
+        public IOperationResponse<string> PlaceCoverOrder(string pseudoAccount,
+            string exchange, string symbol, TradeType tradeType, OrderType orderType,
             int quantity, float price, float triggerPrice)
         {
             IDictionary<string, object> data = new Dictionary<string, object>
@@ -160,8 +160,8 @@ namespace com.dakshata.autotrader.api
             return Execute<string>(POST, TRADING_URI + "/placeCoverOrder", data);
         }
 
-        public IOperationResponse<string> PlaceRegularOrder(string pseudoAccount, 
-            string exchange, string symbol, TradeType tradeType, OrderType orderType, 
+        public IOperationResponse<string> PlaceRegularOrder(string pseudoAccount,
+            string exchange, string symbol, TradeType tradeType, OrderType orderType,
             ProductType productType, int quantity, float price, float triggerPrice)
         {
             IDictionary<string, object> data = new Dictionary<string, object>
@@ -227,7 +227,7 @@ namespace com.dakshata.autotrader.api
             // Nothing needed here
         }
 
-        private IOperationResponse<T> Execute<T>(string method, string uri, 
+        private IOperationResponse<T> Execute<T>(string method, string uri,
             IDictionary<string, object> data = null)
         {
 
@@ -277,7 +277,7 @@ namespace com.dakshata.autotrader.api
             return JsonSerializer.Deserialize<OperationResponse<T>>(content, JSON_OPTIONS);
         }
 
-        private IOperationResponse<bool?> CancelGeneric(string uri, string pseudoAccount, 
+        private IOperationResponse<bool?> CancelGeneric(string uri, string pseudoAccount,
             string platformId)
         {
             Dictionary<string, object> data = new Dictionary<string, object>
