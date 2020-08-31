@@ -9,6 +9,7 @@ using System.Net;
 using System.IO;
 using System.Web;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace com.dakshata.autotrader.api
 {
@@ -32,6 +33,11 @@ namespace com.dakshata.autotrader.api
                 PropertyNameCaseInsensitive = true,
                 IgnoreNullValues = true
             };
+
+        static AutoTrader()
+        {
+            JSON_OPTIONS.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+        }
 
         /// <summary>
         /// Initialize the AutoTrader API with your private API key.
@@ -76,9 +82,9 @@ namespace com.dakshata.autotrader.api
             }
         }
 
-        public IOperationResponse<HashSet<string>> FetchLivePseudoAccounts()
+        public IOperationResponse<ISet<string>> FetchLivePseudoAccounts()
         {
-            return Execute<HashSet<string>>(GET, ACCOUNT_URI + "/fetchLivePseudoAccounts");
+            return Execute<ISet<string>>(GET, ACCOUNT_URI + "/fetchLivePseudoAccounts");
         }
 
         public IOperationResponse<bool?> CancelOrderByPlatformId(string pseudoAccount,
@@ -203,17 +209,17 @@ namespace com.dakshata.autotrader.api
 
         public IOperationResponse<ISet<PlatformMargin>> ReadPlatformMargins(string pseudoAccount)
         {
-            throw new NotImplementedException();
+            return Read<PlatformMargin>(pseudoAccount, "/readPlatformMargins");
         }
 
         public IOperationResponse<ISet<PlatformOrder>> ReadPlatformOrders(string pseudoAccount)
         {
-            throw new NotImplementedException();
+            return Read<PlatformOrder>(pseudoAccount, "/readPlatformOrders");
         }
 
         public IOperationResponse<ISet<PlatformPosition>> ReadPlatformPositions(string pseudoAccount)
         {
-            throw new NotImplementedException();
+            return Read<PlatformPosition>(pseudoAccount, "/readPlatformPositions");
         }
 
         public void Shutdown()
@@ -281,6 +287,16 @@ namespace com.dakshata.autotrader.api
             };
 
             return Execute<bool?>(POST, TRADING_URI + uri, data);
+        }
+
+        public IOperationResponse<ISet<T>> Read<T>(string pseudoAccount, string uri)
+        {
+            IDictionary<string, object> data = new Dictionary<string, object>
+            {
+                ["pseudoAccount"] = pseudoAccount,
+            };
+
+            return Execute<ISet<T>>(POST, TRADING_URI + uri, data);
         }
 
     }

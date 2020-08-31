@@ -21,7 +21,7 @@ namespace com.dakshata.autotrader.api
         /// Provides live pseudo accounts available under your user.
         /// </summary>
         /// <returns> live pseudo accounts </returns>
-        IOperationResponse<HashSet<String>> FetchLivePseudoAccounts();
+        IOperationResponse<ISet<String>> FetchLivePseudoAccounts();
 
         /// <summary>
         /// Places a regular order. For more information, please see <a href=
