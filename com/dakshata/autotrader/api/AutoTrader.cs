@@ -174,6 +174,33 @@ namespace com.dakshata.autotrader.api
             return Execute<string>(POST, TRADING_URI + "/placeRegularOrder", data);
         }
 
+        public IOperationResponse<bool?> SquareOffPosition(string pseudoAccount,
+            PositionCategory category, PositionType type, string exchange, string symbol)
+        {
+            IDictionary<string, object> data = new Dictionary<string, object>
+            {
+                ["pseudoAccount"] = pseudoAccount,
+                ["category"] = category,
+                ["type"] = type,
+                ["exchange"] = exchange,
+                ["symbol"] = symbol
+            };
+
+            return Execute<bool?>(POST, TRADING_URI + "/squareOffPosition", data);
+        }
+
+        public IOperationResponse<bool?> SquareOffPortfolio(string pseudoAccount,
+            PositionCategory category)
+        {
+            IDictionary<string, object> data = new Dictionary<string, object>
+            {
+                ["pseudoAccount"] = pseudoAccount,
+                ["category"] = category
+            };
+
+            return Execute<bool?>(POST, TRADING_URI + "/squareOffPortfolio", data);
+        }
+
         public IOperationResponse<ISet<PlatformMargin>> ReadPlatformMargins(string pseudoAccount)
         {
             throw new NotImplementedException();
@@ -192,18 +219,6 @@ namespace com.dakshata.autotrader.api
         public void Shutdown()
         {
             // Nothing needed here
-        }
-
-        public IOperationResponse<bool?> SquareOffPortfolio(string pseudoAccount, 
-            PositionCategory category)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IOperationResponse<bool?> SquareOffPosition(string pseudoAccount, 
-            PositionCategory category, PositionType type, string exchange, string symbol)
-        {
-            throw new NotImplementedException();
         }
 
         private IOperationResponse<T> Execute<T>(string method, string uri, 
@@ -255,6 +270,7 @@ namespace com.dakshata.autotrader.api
 
             return JsonSerializer.Deserialize<OperationResponse<T>>(content, JSON_OPTIONS);
         }
+
         private IOperationResponse<bool?> CancelGeneric(string uri, string pseudoAccount, 
             string platformId)
         {
