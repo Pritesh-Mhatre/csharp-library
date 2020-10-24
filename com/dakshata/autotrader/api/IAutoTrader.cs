@@ -90,6 +90,16 @@ namespace com.dakshata.autotrader.api
         IOperationResponse<bool?> ModifyOrderByPlatformId(string pseudoAccount, string platformId, OrderType? orderType, int? quantity, float? price, float? triggerPrice);
 
         /// <summary>
+        /// Cancels all open orders for the given account. For more information, please
+        /// see
+        /// <a href="https://stocksdeveloper.in/documentation/api/cancel-all-orders/">api
+        /// docs</a>.
+        /// </summary>
+        /// <param name="pseudoAccount"> pseudo account </param>
+        /// <returns> <code>true</code> on success, <code>false</code> otherwise </returns>
+        IOperationResponse<bool?> CancelAllOrders(string pseudoAccount);
+
+        /// <summary>
         /// Cancels an order. For more information, please see
         /// <a href="https://stocksdeveloper.in/documentation/api/cancel-order/">api
         /// docs</a>.

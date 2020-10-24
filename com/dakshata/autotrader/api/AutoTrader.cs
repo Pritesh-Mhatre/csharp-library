@@ -89,6 +89,11 @@ namespace com.dakshata.autotrader.api
             return Execute<ISet<string>>(GET, ACCOUNT_URI + "/fetchLivePseudoAccounts");
         }
 
+        public IOperationResponse<bool?> CancelAllOrders(string pseudoAccount)
+        {
+            return CancelGeneric("/cancelAllOrders", pseudoAccount, null);
+        }
+
         public IOperationResponse<bool?> CancelOrderByPlatformId(string pseudoAccount,
             string platformId)
         {
@@ -284,9 +289,13 @@ namespace com.dakshata.autotrader.api
         {
             Dictionary<string, object> data = new Dictionary<string, object>
             {
-                { "pseudoAccount", pseudoAccount },
-                { "platformId", platformId }
+                { "pseudoAccount", pseudoAccount }
             };
+
+            if (platformId != null)
+            {
+                data["platformId"] = platformId;
+            }
 
             return Execute<bool?>(POST, TRADING_URI + uri, data);
         }
