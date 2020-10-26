@@ -2,16 +2,19 @@
 <package >
   <metadata>
     <id>StocksDeveloper.AutoTraderWeb.Api</id>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <title>StocksDeveloper Broker Independent Automated Trading C# API</title>
     <authors>Pritesh Mhatre</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <projectUrl>https://stocksdeveloper.in/documentation/client-setup/c-library/</projectUrl>
     <description>C# library for automated trading on Indian brokers (Zerodha, Upstox, AliceBlue, Finvasia, MasterTrust, Angel Broking)</description>
-    <releaseNotes>First Release</releaseNotes>
+    <releaseNotes>Added CancelAllOrders function</releaseNotes>
     <copyright>Copyright © 2020 Stocks Developer</copyright>
 	<repository type="git" url="https://github.com/Pritesh-Mhatre/csharp-library.git" branch="master" />
     <tags>Automated Trading C# API India Zerodha Upstox AliceBlue Finvasia MasterTrust Angel Broking</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.7.2" />
+    </dependencies>	
   </metadata>
 </package>
