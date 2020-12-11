@@ -8,7 +8,11 @@
         KITE,
         UPSTOX,
         SCALPERT,
-        ANT
+        ANT,
+        ANGEL,
+        SHOONYA,
+        PROFITMART,
+        MASTERTRUST
     }
 
 }
