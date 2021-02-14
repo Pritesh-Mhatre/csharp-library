@@ -13,6 +13,24 @@ namespace com.dakshata.trading.model.portfolio
 
         float? Available { get; }
 
+        float? Net { get; }
+
+        float? Span { get; }
+
+        float? Exposure { get; }
+
+        float? Collateral { get; }
+
+        float? Payin { get; }
+
+        float? Payout { get; }
+
+        float? Adhoc { get; }
+
+        float? RealisedMtm { get; }
+
+        float? UnrealisedMtm { get; }
+
     }
 
 }
