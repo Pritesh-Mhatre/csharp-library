@@ -10,7 +10,7 @@ namespace com.dakshata.trading.model.platform
 
         public float? Ltp { get; set; }
 
-        public TradingPlatform Platform { get; set; }
+        public string Platform { get; set; }
 
         public string AccountId { get; set; }
 

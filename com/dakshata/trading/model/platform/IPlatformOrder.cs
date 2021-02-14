@@ -22,7 +22,7 @@ namespace com.dakshata.trading.model.platform
 
         float? AveragePrice { get; }
 
-        TradingPlatform Platform { get; }
+        string Platform { get; }
 
         string ClientId { get; }
 

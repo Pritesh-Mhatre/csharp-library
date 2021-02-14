@@ -100,7 +100,6 @@
     <Compile Include="com\dakshata\trading\model\portfolio\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="com\dakshata\constants\trading\TradeType.cs" />
-    <Compile Include="com\dakshata\constants\trading\TradingPlatform.cs" />
     <Compile Include="com\dakshata\constants\trading\Validity.cs" />
     <Compile Include="com\dakshata\constants\trading\Variety.cs" />
   </ItemGroup>

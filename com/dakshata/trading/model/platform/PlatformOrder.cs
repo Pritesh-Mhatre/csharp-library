@@ -23,7 +23,7 @@ namespace com.dakshata.trading.model.platform
 
         public int? FilledQuantity { get; set; }
 
-        public TradingPlatform Platform { get; set; }
+        public string Platform { get; set; }
 
         public OrderStatus Status { get; set; }
 

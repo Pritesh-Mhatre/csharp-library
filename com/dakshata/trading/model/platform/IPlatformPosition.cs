@@ -12,7 +12,7 @@ namespace com.dakshata.trading.model.platform
 
         float? Ltp { get; }
 
-        TradingPlatform Platform { get; }
+        string Platform { get; }
 
         int? OvernightQuantity { get; }
 
