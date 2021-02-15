@@ -7,6 +7,8 @@ namespace com.dakshata.trading.model.portfolio
     {
         MarginCategory Category { get; }
 
+        float? Total { get; }
+
         float? Funds { get; }
 
         float? Utilized { get; }

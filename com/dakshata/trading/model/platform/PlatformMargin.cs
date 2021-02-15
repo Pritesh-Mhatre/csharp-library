@@ -7,6 +7,8 @@ namespace com.dakshata.trading.model.platform
     {
         public MarginCategory Category { get; set; }
 
+        public float? Total { get; set; }
+
         public float? Funds { get; set; }
 
         public float? Utilized { get; set; }
@@ -43,6 +45,7 @@ namespace com.dakshata.trading.model.platform
                 ", tradingAccount=" + TradingAccount +
                 ", stockBroker=" + StockBroker +
                 ", category=" + Category +
+                ", Total=" + Total +
                 ", funds=" + Funds +
                 ", utilized=" + Utilized +
                 ", available=" + Available + "]";
