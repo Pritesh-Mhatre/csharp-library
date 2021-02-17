@@ -75,6 +75,36 @@ namespace com.dakshata.autotrader.api
         IOperationResponse<String> PlaceCoverOrder(string pseudoAccount, string exchange, string symbol, TradeType tradeType, OrderType orderType, int quantity, float price, float triggerPrice);
 
         /// <summary>
+        /// Places an advanced order. For more information, please see <a href=
+        /// "https://stocksdeveloper.in/documentation/api/place-advanced-order/">api
+        /// docs</a>.
+        /// </summary>
+        /// <param name="variety"> variety </param>
+        /// <param name="pseudoAccount"> pseudo account </param>
+        /// <param name="exchange">      exchange </param>
+        /// <param name="symbol">        symbol </param>
+        /// <param name="tradeType">     trade type </param>
+        /// <param name="orderType">     order type </param>
+        /// <param name="productType">   product type </param>
+        /// <param name="quantity">      quantity </param>
+        /// <param name="price">         price </param>
+        /// <param name="triggerPrice">  trigger price </param>
+        /// <param name="target"> target (Bracket order) </param>
+        /// <param name="stoploss"> stoploss (Bracket order) </param>
+        /// <param name="trailingStoploss"> trailingStoploss (Bracket order) </param>
+        /// <param name="disclosedQuantity"> disclosedQuantity </param>
+        /// <param name="validity"> validity </param>
+        /// <param name="amo"> amo (indicates an After Market Order) </param>
+        /// <param name="strategyId"> strategyId (kept for future use) </param>
+        /// <param name="comments"> comments (optional) </param>
+        /// <param name="publisherId"> publisherId (optional) </param>
+        /// <returns> the order id given by your stock broker </returns>
+        IOperationResponse<String> PlaceAdvancedOrder(string variety, string pseudoAccount, string exchange, string symbol,
+            TradeType tradeType, OrderType orderType, ProductType productType, int quantity, float price, float triggerPrice,
+            float target, float stoploss, float trailingStoploss, int disclosedQuantity, string validity, bool amo,
+            string strategyId, string comments, string publisherId);
+
+        /// <summary>
         /// Modifies the order as per the parameters passed.
         /// </summary>
         /// <param name="pseudoAccount"> pseudo account </param>

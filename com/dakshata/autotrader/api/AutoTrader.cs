@@ -187,6 +187,37 @@ namespace com.dakshata.autotrader.api
             return Execute<string>(POST, TRADING_URI + "/placeRegularOrder", data);
         }
 
+        public IOperationResponse<string> PlaceAdvancedOrder(string variety, string pseudoAccount, string exchange, string symbol,
+            TradeType tradeType, OrderType orderType, ProductType productType, int quantity, float price, float triggerPrice,
+            float target, float stoploss, float trailingStoploss, int disclosedQuantity, string validity, bool amo,
+            string strategyId, string comments, string publisherId)
+        {
+            IDictionary<string, object> data = new Dictionary<string, object>
+            {
+                ["variety"] = variety,
+                ["pseudoAccount"] = pseudoAccount,
+                ["exchange"] = exchange,
+                ["symbol"] = symbol,
+                ["tradeType"] = tradeType,
+                ["orderType"] = orderType,
+                ["productType"] = productType,
+                ["quantity"] = quantity,
+                ["price"] = price,
+                ["triggerPrice"] = triggerPrice,
+                ["target"] = target,
+                ["stoploss"] = stoploss,
+                ["trailingStoploss"] = trailingStoploss,
+                ["disclosedQuantity"] = disclosedQuantity,
+                ["validity"] = validity,
+                ["amo"] = amo,
+                ["strategyId"] = strategyId,
+                ["comments"] = comments,
+                ["publisherId"] = publisherId
+            };
+
+            return Execute<string>(POST, TRADING_URI + "/placeAdvancedOrder", data);
+        }
+
         public IOperationResponse<bool?> SquareOffPosition(string pseudoAccount,
             PositionCategory category, PositionType type, string exchange, string symbol)
         {
