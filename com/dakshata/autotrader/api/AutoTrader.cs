@@ -284,8 +284,10 @@ namespace com.dakshata.autotrader.api
                 string postData = "";
                 foreach (string key in data.Keys)
                 {
+                    object paramValue = data[key];
+                    string paramText = (paramValue == null) ? "" : paramValue.ToString();
                     postData += HttpUtility.UrlEncode(key) + "="
-                          + HttpUtility.UrlEncode(data[key].ToString()) + "&";
+                          + HttpUtility.UrlEncode(paramText) + "&";
                 }
 
                 byte[] bytes = Encoding.ASCII.GetBytes(postData);
