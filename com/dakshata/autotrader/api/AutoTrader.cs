@@ -187,10 +187,10 @@ namespace com.dakshata.autotrader.api
             return Execute<string>(POST, TRADING_URI + "/placeRegularOrder", data);
         }
 
-        public IOperationResponse<string> PlaceAdvancedOrder(string variety, string pseudoAccount, string exchange, string symbol,
-            TradeType tradeType, OrderType orderType, ProductType productType, int quantity, float price, float triggerPrice,
-            float target, float stoploss, float trailingStoploss, int disclosedQuantity, string validity, bool amo,
-            string strategyId, string comments, string publisherId)
+        public IOperationResponse<string> PlaceAdvancedOrder(Variety variety, string pseudoAccount, 
+            string exchange, string symbol, TradeType tradeType, OrderType orderType, ProductType productType, 
+            int quantity, float price, float triggerPrice, float target, float stoploss, float trailingStoploss, 
+            int disclosedQuantity, Validity validity, bool amo, string strategyId, string comments, string publisherId)
         {
             IDictionary<string, object> data = new Dictionary<string, object>
             {

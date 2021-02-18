@@ -37,7 +37,9 @@ namespace com.dakshata.autotrader.api
         /// <param name="price">         price </param>
         /// <param name="triggerPrice">  trigger price </param>
         /// <returns> the order id given by your stock broker </returns>
-        IOperationResponse<String> PlaceRegularOrder(string pseudoAccount, string exchange, string symbol, TradeType tradeType, OrderType orderType, ProductType productType, int quantity, float price, float triggerPrice);
+        IOperationResponse<String> PlaceRegularOrder(string pseudoAccount, string exchange, string symbol, 
+            TradeType tradeType, OrderType orderType, ProductType productType, int quantity, 
+            float price, float triggerPrice);
 
         /// <summary>
         /// Places a bracket order. For more information, please see <a href=
@@ -56,7 +58,9 @@ namespace com.dakshata.autotrader.api
         /// <param name="stoploss">         stoploss </param>
         /// <param name="trailingStoploss"> trailing stoploss </param>
         /// <returns> the order id given by your stock broker </returns>
-        IOperationResponse<String> PlaceBracketOrder(string pseudoAccount, string exchange, string symbol, TradeType tradeType, OrderType orderType, int quantity, float price, float triggerPrice, float target, float stoploss, float trailingStoploss);
+        IOperationResponse<String> PlaceBracketOrder(string pseudoAccount, string exchange, string symbol, 
+            TradeType tradeType, OrderType orderType, int quantity, float price, float triggerPrice, 
+            float target, float stoploss, float trailingStoploss);
 
         /// <summary>
         /// Places a cover order. For more information, please see <a href=
@@ -72,7 +76,8 @@ namespace com.dakshata.autotrader.api
         /// <param name="price">         price </param>
         /// <param name="triggerPrice">  trigger price </param>
         /// <returns> the order id given by your stock broker </returns>
-        IOperationResponse<String> PlaceCoverOrder(string pseudoAccount, string exchange, string symbol, TradeType tradeType, OrderType orderType, int quantity, float price, float triggerPrice);
+        IOperationResponse<String> PlaceCoverOrder(string pseudoAccount, string exchange, string symbol, 
+            TradeType tradeType, OrderType orderType, int quantity, float price, float triggerPrice);
 
         /// <summary>
         /// Places an advanced order. For more information, please see <a href=
@@ -99,10 +104,10 @@ namespace com.dakshata.autotrader.api
         /// <param name="comments"> comments (optional) </param>
         /// <param name="publisherId"> publisherId (optional) </param>
         /// <returns> the order id given by your stock broker </returns>
-        IOperationResponse<String> PlaceAdvancedOrder(string variety, string pseudoAccount, string exchange, string symbol,
-            TradeType tradeType, OrderType orderType, ProductType productType, int quantity, float price, float triggerPrice,
-            float target, float stoploss, float trailingStoploss, int disclosedQuantity, string validity, bool amo,
-            string strategyId, string comments, string publisherId);
+        IOperationResponse<String> PlaceAdvancedOrder(Variety variety, string pseudoAccount, string exchange, 
+            string symbol, TradeType tradeType, OrderType orderType, ProductType productType, int quantity, 
+            float price, float triggerPrice, float target, float stoploss, float trailingStoploss, 
+            int disclosedQuantity, Validity validity, bool amo, string strategyId, string comments, string publisherId);
 
         /// <summary>
         /// Modifies the order as per the parameters passed.
