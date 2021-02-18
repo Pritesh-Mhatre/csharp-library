@@ -187,6 +187,14 @@ namespace com.dakshata.autotrader.api
         IOperationResponse<ISet<PlatformPosition>> ReadPlatformPositions(string pseudoAccount);
 
         /// <summary>
+        /// Read trading platform holdings from the trading account mapped to the given
+        /// pseudo account.
+        /// </summary>
+        /// <param name="pseudoAccount"> pseudo account id </param>
+        /// <returns> holdings trading platform holdings </returns>
+        IOperationResponse<ISet<PlatformHolding>> ReadPlatformHoldings(string pseudoAccount);
+
+        /// <summary>
         /// Read trading platform margins from the trading account mapped to the given
         /// pseudo account.
         /// </summary>

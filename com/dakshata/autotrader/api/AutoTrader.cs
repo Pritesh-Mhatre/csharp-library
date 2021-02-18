@@ -260,6 +260,11 @@ namespace com.dakshata.autotrader.api
             return Read<PlatformPosition>(pseudoAccount, "/readPlatformPositions");
         }
 
+        public IOperationResponse<ISet<PlatformHolding>> ReadPlatformHoldings(string pseudoAccount)
+        {
+            return Read<PlatformHolding>(pseudoAccount, "/readPlatformHoldings");
+        }
+
         public void Shutdown()
         {
             // Nothing needed here
