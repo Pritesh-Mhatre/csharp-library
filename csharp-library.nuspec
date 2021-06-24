@@ -2,13 +2,13 @@
 <package >
   <metadata>
     <id>StocksDeveloper.AutoTraderWeb.Api</id>
-    <version>1.2.3</version>
+    <version>1.3.0</version>
     <title>StocksDeveloper Broker Independent Automated Trading C# API</title>
     <authors>Pritesh Mhatre</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <projectUrl>https://stocksdeveloper.in/documentation/client-setup/c-library/</projectUrl>
-    <description>C# library for automated trading on Indian brokers (Zerodha, Upstox, AliceBlue, Finvasia, Angel Broking, Fyers)</description>
+    <description>C# library for automated trading on Indian brokers (Zerodha, Upstox, AliceBlue, Finvasia, Angel Broking, Fyers, IIFL)</description>
     <releaseNotes>Added upcoming trading platforms</releaseNotes>
     <copyright>Copyright © 2021 Stocks Developer</copyright>
 	<repository type="git" url="https://github.com/Pritesh-Mhatre/csharp-library.git" branch="master" />
