@@ -21,6 +21,10 @@ namespace com.dakshata.trading.model.platform
         float? RealisedPnl { get; }
 
         float? UnrealisedPnl { get; }
+
+        PositionState State { get; }
+
+        PositionDirection Direction { get; }
     }
 
 }

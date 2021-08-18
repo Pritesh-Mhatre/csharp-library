@@ -76,6 +76,7 @@
   <ItemGroup>
     <Compile Include="com\dakshata\autotrader\api\AutoTrader.cs" />
     <Compile Include="com\dakshata\autotrader\api\IAutoTrader.cs" />
+    <Compile Include="com\dakshata\constants\trading\PositionDirection.cs" />
     <Compile Include="com\dakshata\data\model\common\IOperationResponse.cs" />
     <Compile Include="com\dakshata\trading\model\platform\IPlatformHolding.cs" />
     <Compile Include="com\dakshata\trading\model\platform\IPlatformMargin.cs" />
