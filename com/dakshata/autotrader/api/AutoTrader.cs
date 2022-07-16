@@ -16,7 +16,11 @@ namespace com.dakshata.autotrader.api
     public class AutoTrader : IAutoTrader
     {
 
-        public const string SERVER_URL = "https://api.stocksdeveloper.in";
+        public const string PRIMARY_SERVER_URL = "https://apix.stocksdeveloper.in";
+        
+        public const string BACKUP_SERVER_URL = "https://api.stocksdeveloper.in";
+
+        public const string SERVER_URL = PRIMARY_SERVER_URL;
 
         private const string GET = "GET", POST = "POST";
 

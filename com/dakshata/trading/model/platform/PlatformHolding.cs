@@ -25,7 +25,13 @@
 
 		public int? T1Qty { get; set; }
 
+		public int? TotalQty { get; set; }
+
 		public float? Pnl { get; set; }
+
+		public float? Ltp { get; set; }
+
+		public float? CurrentValue { get; set; }
 
 		public float? Haircut { get; set; }
 

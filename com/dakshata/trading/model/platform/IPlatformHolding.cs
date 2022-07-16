@@ -28,7 +28,13 @@ namespace com.dakshata.trading.model.platform
 
 		int? T1Qty { get; }
 
+		int? TotalQty { get; }
+
 		float? Pnl { get; }
+
+		float? Ltp { get; }
+
+		float? CurrentValue { get; }
 
 		float? Haircut { get; }
 

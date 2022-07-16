@@ -18,6 +18,8 @@ namespace com.dakshata.com.dakshata.trading.model.portfolio
 
         public float? Pnl { get; set; }
 
+        public float? AtPnl { get; set; }
+
         public float? Mtm { get; set; }
 
         public float? BuyValue { get; set; }

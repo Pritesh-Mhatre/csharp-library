@@ -24,6 +24,8 @@ namespace com.dakshata.com.dakshata.trading.model.portfolio
 
         float? Pnl { get; }
 
+        float? AtPnl { get; }
+
         float? Mtm { get; }
 
         float? BuyValue { get; }
